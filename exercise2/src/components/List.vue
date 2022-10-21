@@ -1,18 +1,18 @@
 <template>
-
-  <ul>
-    <li v-for="item in paginatedData" :key="item._id">
-      {{ item.name }}
-    </li>
-  </ul>
-  <div class="pagination">
+  <div>
     <ul>
-      <li @click="changePage(currentPage-1)" :class="{disabled: currentPage === 0}">&lt;</li>
-      <li v-for="p in pages" :key="p" @click="changePage(p)" :class="{active: p === currentPage}">{{ p + 1 }}</li>
-      <li @click="changePage(currentPage+1)" :class="{disabled: currentPage === pages.length - 1}">&gt;</li>
+      <li v-for="item in paginatedData" :key="item._id">
+        {{ item.name }}
+      </li>
     </ul>
+    <div class="pagination">
+      <ul>
+        <li @click="changePage(currentPage-1)" :class="{disabled: currentPage === 0}">&lt;</li>
+        <li v-for="p in pages" :key="p" @click="changePage(p)" :class="{active: p === currentPage}">{{ p + 1 }}</li>
+        <li @click="changePage(currentPage+1)" :class="{disabled: currentPage === pages.length - 1}">&gt;</li>
+      </ul>
+    </div>
   </div>
-
 </template>
 
 <script>
@@ -23,10 +23,16 @@
       data: {type: Array, default: ()=>[]},
       options: {type: Object, default: ()=>({limit: 25, offset: 0})},
     },
+    data: function() {
+      return {
+        pageOptions: this.options,
+      };
+    },
     computed: {
       // sort data by name
       sortedData() {
-        return this.data.sort((a, b)=>{
+        const newData = this.data;
+        return newData.sort((a, b)=>{
           if (a.name < b.name) {
             return -1;
           } else if (a.name > b.name) {
@@ -52,7 +58,7 @@
     },
     methods: {
       changePage(page) {
-        this.options.pagination.offset = (page) * this.options.pagination.limit;
+        this.pageOptions.pagination.offset = (page) * this.pageOptions.pagination.limit;
       },
     },
   };
