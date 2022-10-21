@@ -16,6 +16,7 @@ describe('4 - Features Interactions', () => {
 
     it('Should sort by name descending', ()=>{
       cy.get('[data-cy=sort-by-name]').click();
+      cy.get('[data-cy=sort-by-name]').click();
       cy.get('[data-cy=cell-1-1]').contains('Zimmerman Barry');
     });
   });
@@ -34,9 +35,9 @@ describe('4 - Features Interactions', () => {
       cy.get('[data-cy=cell-1-1]').contains('Adrian Burch');
     });
 
-    it('Should search for "Stephens Townsend"', ()=>{
-      cy.get('[data-cy=search-input]').clear().type('Stephens Townsend');
-      cy.get('[data-cy=cell-1-1]').contains('Stephens Townsend');
+    it('Should search for "Zimmerman Barry"', ()=>{
+      cy.get('[data-cy=search-input]').clear().type('Zimmerman Barry');
+      cy.get('[data-cy=cell-1-1]').contains('Zimmerman Barry');
     });
   });
 
