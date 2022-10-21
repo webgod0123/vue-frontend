@@ -1,35 +1,35 @@
 <template>
+  <div>
+    <h2>Exercise 5</h2>
+    <h4>Statement</h4>
+    <div class="statement">
+      <p>
+        Please implement the 2 empty functions from <span class="code">helpers/helpers.js</span>: <span class="code">getValueAtPath</span> and
+        <span class="code">groupByKey</span>.
+      </p>
+      <p>
+        Check their usage in <span class="code">App.js</span> to understand the specs.
+      </p>
+    </div>
+    <h4>Solution</h4>
+    <div class="solution">
 
-  <h2>Exercise 5</h2>
-  <h4>Statement</h4>
-  <div class="statement">
-    <p>
-      Please implement the 2 empty functions from <span class="code">helpers/helpers.js</span>: <span class="code">getValueAtPath</span> and
-      <span class="code">groupByKey</span>.
-    </p>
-    <p>
-      Check their usage in <span class="code">App.js</span> to understand the specs.
-    </p>
-  </div>
-  <h4>Solution</h4>
-  <div class="solution">
+      <h5>Gender</h5>
+      <p v-if="genderGroups">Male: {{ parseInt(genderGroups.male * 100) }}%, Female: {{ parseInt(genderGroups.female * 100) }}%</p>
 
-    <h5>Gender</h5>
-    <p v-if="genderGroups">Male: {{ parseInt(genderGroups.male * 100) }}%, Female: {{ parseInt(genderGroups.female * 100) }}%</p>
-
-    <h5>Table</h5>
-    <table>
-      <thead>
-        <tr>
-          <th v-for="col in columns" :key="col">{{ col.split('.').slice(-1)[0] }}</th>
+      <h5>Table</h5>
+      <table>
+        <thead>
+          <tr>
+            <th v-for="col in columns" :key="col">{{ col.split('.').slice(-1)[0] }}</th>
+          </tr>
+        </thead>
+        <tr v-for="item in people" :key="item._id">
+          <th v-for="col in columns" :key="col">{{ getValueAtPath(item, col) }}</th>
         </tr>
-      </thead>
-      <tr v-for="item in people" :key="item._id">
-        <th v-for="col in columns" :key="col">{{ getValueAtPath(item, col) }}</th>
-      </tr>
-    </table>
+      </table>
+    </div>
   </div>
-
 </template>
 
 <script>
